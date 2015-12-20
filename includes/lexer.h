@@ -20,6 +20,11 @@ typedef struct	s_group_syntax
 	t_syntax		*group_syntax;
 }				t_group_syntax;
 
+typedef struct	s_lexical_config
+{
+	t_group_syntax	*lexical;
+}				t_lexical_config;
+
 typedef struct	s_lexer
 {
 	t_token			*tk;
@@ -33,6 +38,7 @@ t_group_syntax		*find_group_syntax(t_group_syntax *gr, char *name);
 void				insert_group_syntax(t_group_syntax **gr, t_group_syntax *new);
 t_syntax			*create_syntax(char *name, char *syntax, unsigned int type);
 
-void				add_syntax(t_group_syntax **gr, char *group_name, t_syntax *new);
+void				add_syntax(t_lexical_config **config, char *group_name, t_syntax *new);
+void				show_config(t_lexical_config *config);
 
 #endif

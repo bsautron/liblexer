@@ -12,6 +12,7 @@ SRC = main.c \
 	  insert_group_syntax.c \
 	  find_group_syntax.c \
 	  add_syntax.c \
+	  show_config.c \
 
 INC_DIR = includes/
 INC_FILES = lexer.h \
