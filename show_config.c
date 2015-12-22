@@ -3,7 +3,7 @@
 static t_syntax			*print_syntax(t_syntax *stx)
 {
 	ft_putstr(" [");
-	ft_putstr(stx->name);
+	ft_putstr(stx->syntax);
 	ft_putstr("]");
 	return (stx);
 }
@@ -17,8 +17,8 @@ static t_group_syntax	*print_group(t_group_syntax *gr)
 	return (gr);
 }
 
-void					show_config(t_lexical_config *config)
+void					show_config(t_group_syntax *lexical)
 {
-	ft_putendl("\tLEXICAL CONFIGURATION");
-	LIST_APPLY(config->lexical, &print_group);
+	ft_putendl("\t-- LEXICAL CONFIGURATION --");
+	LIST_APPLY(lexical, &print_group);
 }

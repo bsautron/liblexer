@@ -11,12 +11,14 @@ SRC = main.c \
 	  create_syntax.c \
 	  insert_group_syntax.c \
 	  find_group_syntax.c \
+	  find_syntax.c \
 	  add_syntax.c \
 	  show_config.c \
+	  get_next_token.c \
+	  get_token.c \
 
 INC_DIR = includes/
-INC_FILES = lexer.h \
-			token.h
+INC_FILES = lexer.h
 
 INC_DIR_OTHER = libft/includes/
 
