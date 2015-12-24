@@ -35,6 +35,7 @@ typedef struct	s_type_syntax
 	char			*group_name;
 	char			*name;
 	unsigned int	nb_match;
+	int				exactly;
 }				t_type_syntax;
 
 typedef struct	s_token
