@@ -66,6 +66,6 @@ t_lexer				*init_lexer(void);
 t_token				*get_token(t_lexer **lexer, char *str);
 t_token				*get_next_token(t_lexer **lexer, char *str);
 
-t_type_syntax		find_syntax(t_group_syntax *gr, char *syntax);
+t_type_syntax		find_syntax(t_group_syntax *gr, char *syntax, int exactly);
 
 #endif

@@ -14,8 +14,11 @@ t_token			*get_token(t_lexer **lexer, char *str)
 			dprintf(1, "%s: %s\n", "Unexepted token", new_tk->value);
 			exit(1);
 		}
-//		dprintf(1, "-ADD: '%10s'%10s\n\n", new_tk->value, new_tk->type.name);
-		LIST_PUSH_BACK(&tk, new_tk);
+		if (ft_strcmp(new_tk->type.group_name, "Ignore"))
+		{
+			dprintf(1, "-ADD: '%10s'%10s\n", new_tk->value, new_tk->type.name);
+			LIST_PUSH_BACK(&tk, new_tk);
+		}
 	}
 	return (tk);
 }
