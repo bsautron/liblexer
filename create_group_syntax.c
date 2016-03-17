@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 t_group_syntax	*create_group_syntax(char *name)
 {

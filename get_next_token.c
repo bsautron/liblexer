@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 //function push
 //function pop

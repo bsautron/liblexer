@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 void		add_syntax(t_lexer **lexer, char *group_name, char *name, char *syntax)
 {

@@ -1,12 +1,7 @@
-CC = gcc
-NAME = lexer
-CFLAGS = -Wextra -Wall -Werror
-
-LIBS = -L./libft -lft
-LIBS_NAME = libft/libft.a
-
-SRC = main.c \
-	  init_lexer.c \
+NAME = liblexer
+DEPENDENCIES = libft \
+								liblist
+SOURCES = init_lexer.c \
 	  create_group_syntax.c \
 	  create_syntax.c \
 	  insert_group_syntax.c \
@@ -17,35 +12,55 @@ SRC = main.c \
 	  get_next_token.c \
 	  get_token.c \
 
-INC_DIR = includes/
-INC_FILES = lexer.h
+SOURCES_FOLDER = .
 
-INC_DIR_OTHER = libft/includes/
+CC = gcc
+CFLAGS = -Wextra -Wall -Werror
+TEST_FORDER = test
+INCLUDES_FOLDER = includes
+OBJECTS_FOLDER = .objects
+MAIN = main.c
+MAIN_OBJECT = $(OBJECTS_FOLDER)/$(MAIN:.c=.o)
+INCLUDES = $(NAME).h
 
-OBJ_DIR = .obj/
-OBJ = $(SRC:%.c=.obj/%.o)
+SOURCES_DEPENDENCIES = $(foreach dep, $(DEPENDENCIES), libraries/$(dep)/$(dep).a)
+INCLUDES_LIBRARIES = $(foreach dep,$(DEPENDENCIES),-I libraries/$(dep)/includes)
+HEADERS_LIBRARIES = $(foreach dep,$(DEPENDENCIES),libraries/$(dep)/includes/$(dep).h)
+MAKE_LIBRARIES = $(foreach dep,$(DEPENDENCIES),make -C libraries/$(dep);)
+REBUILD_LIBRARIES = $(foreach dep,$(DEPENDENCIES),make re -C libraries/$(dep);)
 
-LIB_NAME = libft/libft.a
+OBJECTS = $(SOURCES:%.c=%.o)
 
-all: dor libs $(NAME)
+all: init makelib $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) -o $@ $^ $(LIBS) -g
-	@echo "\033[32mReady!\033[0m"
+rebuild: fclean init rebuildlib $(NAME)
 
-dor:
-	@mkdir -pv $(OBJ_DIR)
+makelib:
+	$(MAKE_LIBRARIES)
 
-libs:
-	@make -C libft/
+rebuildlib:
+	$(REBUILD_LIBRARIES)
 
-.obj/%.o: %.c $(addprefix $(INC_DIR), $(INC_FILES)) $(LIB_NAME)
-	@echo "\033[33m 	$<"
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -I $(INC_DIR_OTHER) -o $@ -c $< -g
+init:
+	mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)
+
+$(NAME): $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS))
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS)) $(SOURCES_DEPENDENCIES)
+
+$(MAIN_OBJECT): $(MAIN)
+	$(CC) $(CFLAGS) -I $(INCLUDES_FOLDER) -o $(MAIN_OBJECT) -c $(MAIN) $(INCLUDES_LIBRARIES)
+
+$(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, %.o): $(SOURCES_FOLDER)/%.c $(addprefix $(INCLUDES_FOLDER)/, $(INCLUDES)) $(HEADERS_LIBRARIES)
+	$(CC) $(CFLAGS) -I $(INCLUDES_FOLDER) -o $@ -c $< $(INCLUDES_LIBRARIES)
+
+utest:
+	make -C test/
+	./test/utest
 
 clean:
-	rm -f $(OBJ)
-	@rmdir $(OBJ_DIR) 2> /dev/null || env -i
+	rm -f $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS))
+	rm -f $(MAIN_OBJECT)
+	rm -rf $(OBJECTS_FOLDER)
 
 fclean: clean
 	rm -f $(NAME)

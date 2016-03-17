@@ -1,8 +1,9 @@
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef LIBLEXER_H
+# define LIBLEXER_H
 
-#include <stdio.h>
+# include <stdio.h>
 # include <libft.h>
+# include <liblist.h>
 
 enum			e_type_char
 {

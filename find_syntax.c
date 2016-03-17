@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 static t_type_syntax	apply_special_syntax(t_group_syntax gr, t_syntax stx, int nb_match)
 {

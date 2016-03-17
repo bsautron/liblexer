@@ -1,10 +1,10 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 int		main(void)
 {
 	t_lexer				*lexer;
 	t_token				*token;
-	char				*str = "-#       --##34Ou##i jai 20 ans";
+	char					*str = "-#       --##34Ou##i jai 20 ans";
 
 	lexer = init_lexer();
 
@@ -13,7 +13,6 @@ int		main(void)
 	add_syntax(&lexer, "Other", "Hashtag", "#");
 	add_syntax(&lexer, "Other", "Tiret", "-");
 	add_syntax(&lexer, "Comment", "Single", "##");
-
 
 	show_config(lexer->lexical);
 

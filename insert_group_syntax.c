@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 void		insert_group_syntax(t_group_syntax **start, t_group_syntax *new)
 {

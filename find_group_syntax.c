@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 t_group_syntax	*find_group_syntax(t_group_syntax *gr, char *name)
 {

@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 t_syntax	*create_syntax(char *name, char *syntax, unsigned int type)
 {

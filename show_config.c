@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 static t_syntax			*print_name(t_syntax *stx)
 {

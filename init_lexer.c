@@ -1,4 +1,4 @@
-#include <lexer.h>
+#include <liblexer.h>
 
 t_lexer				*init_lexer(void)
 {
